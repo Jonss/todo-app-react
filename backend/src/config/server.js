@@ -3,9 +3,11 @@ const port = 3000;
 const bodyParser = require('body-parser')
 const express = require('express')
 const server = express()
+const allowCors = require('./cors')
 
 server.use(bodyParser.urlencoded({ extended: true }))
 server.use(bodyParser.json())
+server.use(allowCors)
 
 server.listen(port, function(){
     console.log(`Server is alive and kicking on port ${port}`)
@@ -14,3 +16,5 @@ server.listen(port, function(){
 server.get("/", function(req, resp){
     resp.send("Hello app")
 })
+
+module.exports = server
