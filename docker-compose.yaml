@@ -1,0 +1,38 @@
+version: "2"
+services:
+  backend:
+    container_name: "app-backend"
+    restart: always
+    build: backend/
+    environment:
+      - MONGO_URI=mongodb://mongo/catstore
+      - PORT=3000
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    command: npm run dev
+
+  frontend:
+    container_name: "app-frontend"
+    restart: always
+    build: frontend/
+    expose:
+      - 8000
+    environment:
+      - PORT=8000
+      - NODE_ENV=production
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - "8000:8000"
+    command: npm run dev
+
+  mongo:
+    container_name: "mongo"
+    image: mongo
+    ports:
+      - "27017:27017"
+    command: mongod --smallfiles --logpath=/dev/null 
