@@ -1,4 +1,4 @@
-import React, { Component }from 'react'
+import React, { Component } from 'react'
 import { Router, Route, Redirect, hashHistory} from 'react-router'
 
 import Todo from '../todo/todo'

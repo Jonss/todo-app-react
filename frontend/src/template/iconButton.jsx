@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 
 
-export default class IconButton extends Component() {
+export default class IconButton extends Component {
     render() {
         if(this.props.hide) {
             return null
