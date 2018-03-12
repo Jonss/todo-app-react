@@ -5,7 +5,7 @@ services:
     restart: always
     build: backend/
     environment:
-      - MONGO_URI=mongodb://mongo/catstore
+      - MONGO_URI=mongodb://mongo/todo
       - PORT=3000
       - NODE_ENV=production
     ports:
@@ -20,14 +20,10 @@ services:
     container_name: "app-frontend"
     restart: always
     build: frontend/
-    expose:
-      - 8000
-    environment:
-      - PORT=8000
-      - NODE_ENV=production
-      - CHOKIDAR_USEPOLLING=true
     ports:
       - "8000:8000"
+    links:
+      - backend
     command: npm run dev
 
   mongo:
