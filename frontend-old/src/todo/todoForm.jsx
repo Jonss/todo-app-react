@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import Grid from '../template/grid'
 import IconButton from '../template/iconButton'
-import { bindActionCreators} from 'redux'
-import { changeDescription, search } from '../todo/todoActions'
 
-class TodoForm extends Component {
+export default class TodoForm extends Component {
 
     constructor(props) {
         super(props)
+        console.log("Props" , props)
         this.keyHandler = this.keyHandler.bind(this)
+
     }
 
     keyHandler(e) {
@@ -20,10 +19,6 @@ class TodoForm extends Component {
         }
     }
 
-    componentWillMount() {
-        this.props.search()
-    }
-
     render() {
         return(
 
@@ -32,7 +27,7 @@ class TodoForm extends Component {
                     <input  id="description" 
                         placeholder="Adicione uma tarefa"
                         onKeyUp={this.keyHandler}
-                        onChange={this.props.changeDescription}
+                        onChange={this.props.handleChange}
                         value={this.props.description}
                          className="form-control"></input>
                 </Grid>
@@ -46,9 +41,3 @@ class TodoForm extends Component {
         )
     }
 }
-
-const mapStateToProps = state => ({ description: state.todo.description })
-const mapDispatchToProps = dispatch => 
-    bindActionCreators({ changeDescription, search }, dispatch)
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoForm)
